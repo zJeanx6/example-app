@@ -33,9 +33,7 @@ class CursoController extends Controller
     }
 
     public function show(Curso $curso){
-        
         // $curso = Curso::find($id); // return $curso;
-        
         return view('cursos.show', compact('curso')); // compact o ['curso' => $curso]
     }
 
@@ -47,6 +45,7 @@ class CursoController extends Controller
 
         $request->validate([
             'name'=> 'required|min:3',
+            'slug'=>'required|unique:cursos,slug,' . $curso->id,
             'descripcion'=>'required',
             'categoria'=>'required'
         ]);

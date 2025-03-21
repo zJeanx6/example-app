@@ -14,7 +14,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('home');
 
 // Route::controller(CursoController::class)->group(function(){
 //     Route::get('cursos', 'index')->name('cursos.index');
@@ -31,6 +31,8 @@ Route::resource('cursos', CursoController::class); // Rutas de recursos
 // Route::resource('asignaturas', CursoController::class)->except(['index', 'show']); // Todas las rutas excepto las especificadas
 // Route::resource('asignaturas', CursoController::class)->names('cursos'); // Cambiar el nombre de la ruta
 // Route::resource('asignaturas', CursoController::class)->parameter( 'asignaturas', 'curso')->names('cursos'); // Cambiar el nombre del parametro
+
+Route::view('nosotros', 'nosotros')->name('nosotros'); 
 
 
 // Route::get('cursos/{curso}/{categoria?}', function($curso, $categoria = null){
