@@ -6,32 +6,23 @@
     <title>@yield('title')</title>
     <!-- favicon -->
      <!-- estilos -->
+     <style>
+        .active{
+            color: red;
+            font-weight: bold;
+        }
+     </style>
      {{-- @vite('resources/css/app.css') --}}
      {{-- <script src="https://unpkg.com/@tailwindcss/browser@4"></script> --}}
 </head>
 <body>
     <!-- header -->
-    <header>
-        <h1>JeannFacts</h1>
-        <nav>
-            <ul>
-                <li><a href="{{route('home')}}">home</a>
-                @dump(request()->routeIs('home'))
-                </li>
-                <li><a href="{{route('cursos.index')}}">Cursos</a>
-                @dump(request()->routeIs('cursos.index'))
-                </li>
-                <li><a href="{{route('nosotros')}}">Nosotros</a>
-                @dump(request()->routeIs('nosotros'))
-                </li>
-            </ul>
-        </nav>
-    </header>
+    @include('layouts.partials.header')
      <!-- nav -->
     @yield('content')
 
     <!-- footer -->
-
+    @include('layouts.partials.footer')
     <!-- script -->
 </body>
 </html>
