@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactanosController;
+use App\Http\Controllers\CursoController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,18 +15,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', HomeController::class)->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::controller(CursoController::class)->group(function(){
+//     Route::get('cursos', 'index')->name('cursos.index');
+//     Route::post('cursos', 'store')->name('cursos.store');
+//     Route::get('cursos/create', 'create')->name('cursos.create');
+//     Route::get('cursos/{curso}', 'show')->name('cursos.show');
+//     Route::get('cursos/{curso}/edit', 'edit')->name('cursos.edit');
+//     Route::put('cursos/{curso}', 'update')->name('cursos.update');
+//     Route::delete('cursos/{curso}', 'destroy')->name('cursos.destroy');
+// });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::resource('cursos', CursoController::class); // Rutas de recursos
+// Route::resource('asignaturas', CursoController::class)->only(['index', 'show']); // Solo rutas especificas
+// Route::resource('asignaturas', CursoController::class)->except(['index', 'show']); // Todas las rutas excepto las especificadas
+// Route::resource('asignaturas', CursoController::class)->names('cursos'); // Cambiar el nombre de la ruta
+// Route::resource('asignaturas', CursoController::class)->parameter( 'asignaturas', 'curso')->names('cursos'); // Cambiar el nombre del parametro
 
-require __DIR__.'/auth.php';
+Route::view('nosotros', 'nosotros')->name('nosotros'); 
+ 
+Route::get('contactanos', [ContactanosController::class, 'index'])->name('contactanos.index');
+Route::post('contactanos', [ContactanosController::class, 'store'])->name('contactanos.store');
+
+// Route::get('cursos/{curso}/{categoria?}', function($curso, $categoria = null){
+//     if($categoria){
+//         return "Bienvenido al curso $curso, de la categoria $categoria";
+//     }else{
+//         return "Bienvenido al curso: $curso";
+//     }
+// });
